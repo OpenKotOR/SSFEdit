@@ -1,0 +1,151 @@
+{
+  // These launch entries target the built SSFEdit Windows executable.
+  // VS Code does not provide a dedicated Delphi debug adapter here, so native
+  // binaries still run through the available native debugger adapters.
+  // On Linux/macOS, launching is proxied through Wine to run the Windows .exe.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "SSFEdit: Launch built executable",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}\\${input:ssfeditExecutable}",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "stopAtEntry": false,
+      "preLaunchTask": "SSFEdit: Validate default executable launch surface",
+      "presentation": {
+        "group": "SSFEdit",
+        "order": 1
+      },
+      "linux": {
+        "program": "/usr/bin/env",
+        "args": [
+          "${input:wineCommand}",
+          "${workspaceFolder}/${input:ssfeditExecutable}"
+        ],
+        "MIMode": "gdb",
+        "presentation": {
+          "hidden": true
+        }
+      },
+      "osx": {
+        "program": "/usr/bin/env",
+        "args": [
+          "${input:wineCommand}",
+          "${workspaceFolder}/${input:ssfeditExecutable}"
+        ],
+        "MIMode": "lldb",
+        "presentation": {
+          "hidden": true
+        }
+      }
+    },
+    {
+      "name": "SSFEdit: Launch with SSF file",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}\\${input:ssfeditExecutable}",
+      "args": [
+        "${input:ssfFileArg}"
+      ],
+      "cwd": "${workspaceFolder}",
+      "stopAtEntry": false,
+      "preLaunchTask": "SSFEdit: Validate SSF executable launch surface",
+      "presentation": {
+        "group": "SSFEdit",
+        "order": 2
+      },
+      "linux": {
+        "program": "/usr/bin/env",
+        "args": [
+          "${input:wineCommand}",
+          "${workspaceFolder}/${input:ssfeditExecutable}",
+          "${input:ssfFileArg}"
+        ],
+        "MIMode": "gdb",
+        "presentation": {
+          "hidden": true
+        }
+      },
+      "osx": {
+        "program": "/usr/bin/env",
+        "args": [
+          "${input:wineCommand}",
+          "${workspaceFolder}/${input:ssfeditExecutable}",
+          "${input:ssfFileArg}"
+        ],
+        "MIMode": "lldb",
+        "presentation": {
+          "hidden": true
+        }
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "SSFEdit: Build then launch default flow",
+      "configurations": [
+        "SSFEdit: Launch built executable"
+      ],
+      "preLaunchTask": "${defaultBuildTask}",
+      "stopAll": true,
+      "presentation": {
+        "group": "SSFEdit",
+        "order": 3
+      },
+      "linux": {
+        "presentation": {
+          "hidden": true
+        }
+      },
+      "osx": {
+        "presentation": {
+          "hidden": true
+        }
+      }
+    },
+    {
+      "name": "SSFEdit: Build then launch with SSF file",
+      "configurations": [
+        "SSFEdit: Launch with SSF file"
+      ],
+      "preLaunchTask": "${defaultBuildTask}",
+      "stopAll": true,
+      "presentation": {
+        "group": "SSFEdit",
+        "order": 4
+      },
+      "linux": {
+        "presentation": {
+          "hidden": true
+        }
+      },
+      "osx": {
+        "presentation": {
+          "hidden": true
+        }
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "ssfeditExecutable",
+      "type": "promptString",
+      "description": "Path to the built SSFEdit executable, relative to the workspace root",
+      "default": "SSFEdit.exe"
+    },
+    {
+      "id": "wineCommand",
+      "type": "promptString",
+      "description": "Wine launcher to use on Linux/macOS",
+      "default": "wine"
+    },
+    {
+      "id": "ssfFileArg",
+      "type": "promptString",
+      "description": "Optional SSF file path to pass as the first CLI argument to SSFEdit",
+      "default": ""
+    }
+  ]
+}

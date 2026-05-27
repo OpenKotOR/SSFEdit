@@ -30,10 +30,11 @@ Working rules for agents:
 - Keep the hardcoded label order aligned across UI and file handling code.
 - Treat TLK string indices as position-based. Appending is safe; deleting or reordering existing entries is not.
 - `.dfm` and `.res` files in this repo are binary assets, not text-form forms/resources.
-- `.vscode/tasks.json`, `.vscode/launch.json`, and the file nesting patterns currently describe `TSLPatcher`, not `SSFEdit`. They are not authoritative documentation for this repo.
+- `.vscode/tasks.json`, `.vscode/launch.json`, `.vscode/settings.json`, and `.vscode/extensions.json` are now aligned to SSFEdit, but the Pascal sources and the root docs remain authoritative if tooling metadata ever drifts again.
 
 Validation expectations:
 
 - For documentation-only edits, run `git diff --check`.
+- For `.vscode` metadata edits, validate changed JSON files, run `git diff --check`, and cross-check task or launch behavior claims against `USSFEdit.dpr` and the root docs.
 - For Pascal source edits, prefer a Delphi 7 build on Windows. Linux can only do static validation unless Wine is used to run an already-built executable.
 - There is no automated test suite in the current repo surface; if serializer logic changes, validate the relevant load/save path explicitly.

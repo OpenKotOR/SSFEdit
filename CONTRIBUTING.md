@@ -35,7 +35,7 @@ Preferred path:
 Fallback on Linux or macOS:
 
 - Static review only, unless Wine is available and a previously built executable can be run.
-- Do not rely on the current `.vscode` tasks or launch configurations for SSFEdit; they currently target `TSLPatcher`.
+- Use the `.vscode` tasks and launch configurations as SSFEdit-specific convenience wrappers, but treat Windows Delphi 7 builds and the Pascal source as authoritative when behavior differs.
 
 See `docs/manual-validation.md` for a more detailed validation matrix.
 
@@ -43,7 +43,7 @@ See `docs/manual-validation.md` for a more detailed validation matrix.
 
 - `.dfm` and `.res` files are binary in this repo. If you intentionally change them, mention that clearly in your summary.
 - `.gitignore` excludes several artifact types that are still present in the repo surface. Confirm what is actually staged before concluding a change is complete.
-- There is no automated test suite and no commit history in the current `main` branch, so validation must come from direct source inspection and manual runtime checks.
+- There is no automated test suite and the visible history on the current `main` branch is shallow, so validation must come from direct source inspection and manual runtime checks.
 - Review `docs/limitations.md` before assuming a missing workflow or missing automation is accidental.
 
 ## Preferred contribution style

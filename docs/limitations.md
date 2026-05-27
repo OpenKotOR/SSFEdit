@@ -20,23 +20,21 @@ This repository is a small legacy Delphi tool. Some constraints are part of its 
 - Serializer-sensitive changes require explicit manual load/save validation.
 - Static review is the only broadly available validation path on Linux unless Wine and a previously built executable are available.
 
-## Tooling drift in the workspace
+## Tooling limits in the workspace
 
-- `.vscode/tasks.json` currently targets `TSLPatcher`, not `SSFEdit`.
-- `.vscode/launch.json` currently targets `TSLPatcher`, not `SSFEdit`.
-- `.vscode/settings.json` contains file-nesting patterns for `TSLPatcher`, not for this repo.
-
-These files are useful as generic Pascal editor settings, but they are not authoritative product documentation for SSFEdit.
+- `.vscode/tasks.json`, `.vscode/launch.json`, `.vscode/settings.json`, and `.vscode/extensions.json` are aligned to SSFEdit.
+- They remain convenience-layer metadata, not the primary source of truth for build, CLI, or runtime behavior.
+- On non-Windows hosts, launch flows still depend on Wine and an already-built Windows executable.
 
 ## Repository-history limits
 
-- The current `main` branch has no commit history in this checkout.
+- The current `main` branch has only shallow reachable history in this checkout.
 - Git archaeology is therefore not a trustworthy source of intent here.
 - The Pascal sources and the repository docs are the primary evidence surfaces.
 
 ## File-handling caveats
 
-- `.gitignore` excludes `.exe`, `.cfg`, `.dfm`, and `.res` even though files of those types are already present in the repo surface.
+- `.gitignore` excludes `.exe`, `.cfg`, `.dfm`, and `.res` even though files of those types may already exist in local worktrees.
 - If you intentionally modify tracked artifacts of those types, stage and summarize them deliberately.
 
 ## Format safety caveats
