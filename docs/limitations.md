@@ -20,13 +20,11 @@ This repository is a small legacy Delphi tool. Some constraints are part of its 
 - Serializer-sensitive changes require explicit manual load/save validation.
 - Static review is the only broadly available validation path on Linux unless Wine and a previously built executable are available.
 
-## Tooling drift in the workspace
+## Tooling limits in the workspace
 
-- `.vscode/tasks.json` currently targets `TSLPatcher`, not `SSFEdit`.
-- `.vscode/launch.json` currently targets `TSLPatcher`, not `SSFEdit`.
-- `.vscode/settings.json` contains file-nesting patterns for `TSLPatcher`, not for this repo.
-
-These files are useful as generic Pascal editor settings, but they are not authoritative product documentation for SSFEdit.
+- `.vscode/tasks.json`, `.vscode/launch.json`, and `.vscode/settings.json` are aligned to SSFEdit.
+- They remain convenience-layer metadata, not the primary source of truth for build, CLI, or runtime behavior.
+- On non-Windows hosts, launch flows still depend on Wine and an already-built Windows executable.
 
 ## Repository-history limits
 

@@ -30,7 +30,7 @@ Working rules for agents:
 - Keep the hardcoded label order aligned across UI and file handling code.
 - Treat TLK string indices as position-based. Appending is safe; deleting or reordering existing entries is not.
 - `.dfm` and `.res` files in this repo are binary assets, not text-form forms/resources.
-- `.vscode/tasks.json`, `.vscode/launch.json`, and the file nesting patterns currently describe `TSLPatcher`, not `SSFEdit`. They are not authoritative documentation for this repo.
+- `.vscode/tasks.json`, `.vscode/launch.json`, and `.vscode/settings.json` are now aligned to SSFEdit, but the Pascal sources and the root docs remain authoritative if tooling metadata ever drifts again.
 
 Validation expectations:
 

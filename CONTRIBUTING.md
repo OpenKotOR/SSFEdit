@@ -35,7 +35,7 @@ Preferred path:
 Fallback on Linux or macOS:
 
 - Static review only, unless Wine is available and a previously built executable can be run.
-- Do not rely on the current `.vscode` tasks or launch configurations for SSFEdit; they currently target `TSLPatcher`.
+- Use the `.vscode` tasks and launch configurations as SSFEdit-specific convenience wrappers, but treat Windows Delphi 7 builds and the Pascal source as authoritative when behavior differs.
 
 See `docs/manual-validation.md` for a more detailed validation matrix.
 

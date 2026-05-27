@@ -82,5 +82,5 @@ For workflow-to-unit ownership, see `docs/workflows.md`.
 ## Known drift and risk areas
 
 - The window form files (`.dfm`) in this repo are binary, so UI changes are harder to diff and review than text-form forms.
-- The current `.vscode` workspace files document a different project (`TSLPatcher`) and should be treated as unrelated tooling drift.
+- The `.vscode` workspace files now mirror the SSFEdit repo surface, but they are still convenience metadata rather than the source of truth.
 - The repository currently has no commit history on `main`, so the source files themselves are the only trustworthy project history available in-repo.

@@ -50,7 +50,7 @@ The application optionally accepts a single CLI argument. If the first argument 
 ## Validation limits in the current repo
 
 - There is no automated test suite.
-- The `.vscode/tasks.json` and `.vscode/launch.json` files currently target `TSLPatcher`, not `SSFEdit`, so they should not be used as build instructions for this repository.
+- The `.vscode/tasks.json` and `.vscode/launch.json` files are aligned to SSFEdit, but Windows Delphi 7 build behavior and the Pascal entrypoint remain the authoritative references.
 - `.gitignore` excludes `.exe`, `.cfg`, `.dfm`, and `.res`, even though artifacts of those types are already present in the repo surface. If you intentionally update those files, stage them explicitly and mention it in your change summary.
 
 See `docs/manual-validation.md` for the workflow-specific checks to run after source or serializer changes.

@@ -37,7 +37,7 @@ The source of truth in this repository is the Pascal code, not the current VS Co
 ## Current repo state
 
 - The repo surface is small and self-contained. There is no automated test suite and no existing project documentation besides the Delphi project metadata.
-- The checked-in `.vscode` tasks and launch configs currently target a different Delphi project named `TSLPatcher`; treat them as workspace drift until they are rewritten for SSFEdit.
+- The checked-in `.vscode` tasks, launch configs, file nesting patterns, and extension recommendations are aligned to the SSFEdit project surface.
 - `.gitignore` currently excludes several artifact types that are nevertheless present in the working tree, including `.exe`, `.cfg`, `.dfm`, and `.res`. Be explicit when intentionally changing those files.
 
 For deeper operational detail, use the topic docs under `docs/` rather than expanding the root files as ad hoc catch-alls.

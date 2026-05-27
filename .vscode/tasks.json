@@ -1,0 +1,263 @@
+{
+  // Repo-matched task surface for the Delphi 7 SSFEdit workflow.
+  "version": "2.0.0",
+  "windows": {
+    "options": {
+      "shell": {
+        "executable": "cmd.exe",
+        "args": [
+          "/d",
+          "/c"
+        ]
+      }
+    }
+  },
+  "tasks": [
+    {
+      "label": "SSFEdit: Validate repo surface",
+      "type": "shell",
+      "command": "if [ ! -f USSFEdit.dpr ]; then echo 'Missing USSFEdit.dpr'; exit 1; elif [ ! -f SSFEdit.pas ]; then echo 'Missing SSFEdit.pas'; exit 1; elif [ ! -f UEntryForm.pas ]; then echo 'Missing UEntryForm.pas'; exit 1; elif [ ! -f USSFFile.pas ]; then echo 'Missing USSFFile.pas'; exit 1; elif [ ! -f UTLKFile.pas ]; then echo 'Missing UTLKFile.pas'; exit 1; else echo 'Repo surface OK'; fi",
+      "windows": {
+        "command": "if not exist USSFEdit.dpr (echo Missing USSFEdit.dpr & exit /b 1) else if not exist SSFEdit.pas (echo Missing SSFEdit.pas & exit /b 1) else if not exist UEntryForm.pas (echo Missing UEntryForm.pas & exit /b 1) else if not exist USSFFile.pas (echo Missing USSFFile.pas & exit /b 1) else if not exist UTLKFile.pas (echo Missing UTLKFile.pas & exit /b 1) else echo Repo surface OK"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      },
+      "detail": "Checks that the SSFEdit entrypoint and core Pascal units are present."
+    },
+    {
+      "label": "SSFEdit: Validate executable path",
+      "type": "shell",
+      "command": "exe_path=\"${workspaceFolder}/${input:ssfeditExecutable}\"; if [ ! -f \"$exe_path\" ]; then echo \"Missing $exe_path\"; exit 1; else echo 'Executable path OK'; fi",
+      "windows": {
+        "command": "if not exist \"${workspaceFolder}\\${input:ssfeditExecutable}\" (echo Missing ${workspaceFolder}\\${input:ssfeditExecutable} & exit /b 1) else echo Executable path OK"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      },
+      "detail": "Checks that the chosen SSFEdit executable exists before launch flows."
+    },
+    {
+      "label": "SSFEdit: Validate Wine availability",
+      "type": "shell",
+      "command": "if command -v ${input:wineCommand} >/dev/null 2>&1; then echo 'Wine launcher OK'; else echo 'Missing Wine launcher: ${input:wineCommand}'; exit 1; fi",
+      "windows": {
+        "command": "echo Wine not required on Windows"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      },
+      "detail": "Checks that the configured Wine launcher exists before non-Windows launch flows."
+    },
+    {
+      "label": "SSFEdit: Validate SSF CLI argument",
+      "type": "shell",
+      "command": "ssf_path=\"${input:ssfFileArg}\"; if [ -z \"$ssf_path\" ]; then echo 'Missing SSF file argument'; exit 1; elif [ ! -f \"$ssf_path\" ]; then echo \"Missing $ssf_path\"; exit 1; elif [ \"${ssf_path##*.}\" != \"ssf\" ] && [ \"${ssf_path##*.}\" != \"SSF\" ]; then echo \"Not an .ssf file: $ssf_path\"; exit 1; else echo 'SSF CLI argument OK'; fi",
+      "windows": {
+        "command": "if \"${input:ssfFileArg}\"==\"\" (echo Missing SSF file argument & exit /b 1) else for %I in (\"${input:ssfFileArg}\") do @if not exist \"%~fI\" (echo Missing %~fI & exit /b 1) else if /I not \"%~xI\"==\".ssf\" (echo Not an .ssf file: %~fI & exit /b 1) else echo SSF CLI argument OK"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      },
+      "detail": "Checks that the optional SSFEdit launch argument points to an existing .ssf file."
+    },
+    {
+      "label": "SSFEdit: Validate default executable launch surface",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "SSFEdit: Validate repo surface",
+        "SSFEdit: Validate executable path",
+        "SSFEdit: Validate Wine availability"
+      ],
+      "problemMatcher": [],
+      "runOptions": {
+        "reevaluateOnRerun": true
+      },
+      "detail": "Hidden helper task used before default SSFEdit launch flows.",
+      "hide": true
+    },
+    {
+      "label": "SSFEdit: Validate SSF executable launch surface",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "SSFEdit: Validate repo surface",
+        "SSFEdit: Validate executable path",
+        "SSFEdit: Validate Wine availability",
+        "SSFEdit: Validate SSF CLI argument"
+      ],
+      "problemMatcher": [],
+      "runOptions": {
+        "reevaluateOnRerun": true
+      },
+      "detail": "Hidden helper task used before launch flows that pass an SSF file argument.",
+      "hide": true
+    },
+    {
+      "label": "SSFEdit: Build project (Delphi 7)",
+      "type": "process",
+      "command": "/usr/bin/env",
+      "args": [
+        "bash",
+        "-lc",
+        "printf 'Delphi 7 build is only supported from a Windows host.\\n'; exit 1"
+      ],
+      "windows": {
+        "command": "${input:delphiCompiler}",
+        "args": [
+          "USSFEdit.dpr"
+        ]
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "dependsOn": [
+        "SSFEdit: Validate repo surface"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": {
+        "owner": "pascal",
+        "fileLocation": [
+          "relative",
+          "${workspaceFolder}"
+        ],
+        "source": "dcc32",
+        "pattern": {
+          "regexp": "^(.*)\\((\\d+)\\)\\s+((Fatal|Error|Warning|Hint):\\s+(?:[A-Z]\\d+\\s+)?.*)$",
+          "file": 1,
+          "line": 2,
+          "message": 3,
+          "severity": 4
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "revealProblems": "onProblem",
+        "panel": "dedicated",
+        "clear": true
+      },
+      "detail": "Compiles USSFEdit.dpr with a Delphi 7-compatible compiler on Windows."
+    },
+    {
+      "label": "SSFEdit: Run built executable",
+      "type": "process",
+      "command": "/usr/bin/env",
+      "args": [
+        "bash",
+        "-lc",
+        "printf 'SSFEdit.exe launch is only supported from a Windows host.\\n'; exit 1"
+      ],
+      "windows": {
+        "command": "${workspaceFolder}\\${input:ssfeditExecutable}"
+      },
+      "linux": {
+        "command": "${input:wineCommand}",
+        "args": [
+          "${workspaceFolder}/${input:ssfeditExecutable}"
+        ]
+      },
+      "osx": {
+        "command": "${input:wineCommand}",
+        "args": [
+          "${workspaceFolder}/${input:ssfeditExecutable}"
+        ]
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "dependsOn": [
+        "SSFEdit: Validate default executable launch surface"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      },
+      "detail": "Launches the built SSFEdit executable with no CLI arguments, using Wine on non-Windows hosts."
+    },
+    {
+      "label": "SSFEdit: Run built executable with SSF file",
+      "type": "process",
+      "command": "/usr/bin/env",
+      "args": [
+        "bash",
+        "-lc",
+        "printf 'SSFEdit.exe launch is only supported from a Windows host.\\n'; exit 1"
+      ],
+      "windows": {
+        "command": "${workspaceFolder}\\${input:ssfeditExecutable}",
+        "args": [
+          "${input:ssfFileArg}"
+        ]
+      },
+      "linux": {
+        "command": "${input:wineCommand}",
+        "args": [
+          "${workspaceFolder}/${input:ssfeditExecutable}",
+          "${input:ssfFileArg}"
+        ]
+      },
+      "osx": {
+        "command": "${input:wineCommand}",
+        "args": [
+          "${workspaceFolder}/${input:ssfeditExecutable}",
+          "${input:ssfFileArg}"
+        ]
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "dependsOn": [
+        "SSFEdit: Validate SSF executable launch surface"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      },
+      "detail": "Launches the built SSFEdit executable with an SSF file path, matching USSFEdit.dpr CLI handling."
+    }
+  ],
+  "inputs": [
+    {
+      "id": "delphiCompiler",
+      "type": "promptString",
+      "description": "Path to your Delphi 7 command-line compiler executable",
+      "default": "dcc32.exe"
+    },
+    {
+      "id": "ssfeditExecutable",
+      "type": "promptString",
+      "description": "Path to the built SSFEdit executable, relative to the workspace root",
+      "default": "SSFEdit.exe"
+    },
+    {
+      "id": "wineCommand",
+      "type": "promptString",
+      "description": "Wine launcher to use on Linux/macOS",
+      "default": "wine"
+    },
+    {
+      "id": "ssfFileArg",
+      "type": "promptString",
+      "description": "Optional SSF file path to pass as the first CLI argument to SSFEdit",
+      "default": ""
+    }
+  ]
+}

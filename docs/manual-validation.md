@@ -22,7 +22,7 @@ Preferred path:
 Fallback on Linux or macOS:
 
 - Static source review only, unless Wine is available and a previously built executable can be run.
-- Do not treat the current `.vscode` tasks or launch configurations as authoritative validation helpers because they target `TSLPatcher`.
+- Treat the `.vscode` tasks and launch configurations as SSFEdit-specific helpers, but not as substitutes for direct source inspection or a real Windows Delphi 7 build.
 
 ### Serializer-sensitive changes
 

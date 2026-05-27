@@ -39,5 +39,5 @@ See `docs/file-formats.md` for the code-grounded reference behind these rules.
 
 - `.dfm` and `.res` are binary files in this repo. Treat them as deliberate assets, not text files.
 - `.gitignore` excludes `.exe`, `.cfg`, `.dfm`, and `.res`, even though files of those types already exist in the working tree. Be careful not to assume that a modified tracked artifact will be obvious during staging.
-- `.vscode/settings.json` contains file nesting patterns for `TSLPatcher`, not for SSFEdit.
+- `.vscode/settings.json` now nests files according to the SSFEdit project surface rather than a generic placeholder repo.
 - The source tree currently has no in-repo commit history, so avoid inferring undocumented conventions from git blame or logs.
