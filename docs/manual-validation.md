@@ -66,7 +66,7 @@ Use this tier when `USSFFile.pas`, `UTLKFile.pas`, or the direct SSF stream logi
 
 - Native Linux or macOS builds
 - Automated regression coverage
-- Trustworthy editor tasks or launch configs for SSFEdit from the current `.vscode` folder
+- Full end-to-end confidence in `.vscode` launch or task execution on non-Windows hosts without Wine and an already-built executable
 
 ## Related documents
 

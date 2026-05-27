@@ -22,7 +22,7 @@ This repository is a small legacy Delphi tool. Some constraints are part of its 
 
 ## Tooling limits in the workspace
 
-- `.vscode/tasks.json`, `.vscode/launch.json`, and `.vscode/settings.json` are aligned to SSFEdit.
+- `.vscode/tasks.json`, `.vscode/launch.json`, `.vscode/settings.json`, and `.vscode/extensions.json` are aligned to SSFEdit.
 - They remain convenience-layer metadata, not the primary source of truth for build, CLI, or runtime behavior.
 - On non-Windows hosts, launch flows still depend on Wine and an already-built Windows executable.
 
