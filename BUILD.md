@@ -23,12 +23,12 @@ You can also open `USSFEdit.dpr` directly in the Delphi IDE and build from there
 
 Notes:
 
-- The repo contains both `SSFEdit.exe` and `USSFEdit.exe` as checked-in artifacts. Treat those as existing build outputs, not the source of truth.
+- Some developer worktrees may contain both `SSFEdit.exe` and `USSFEdit.exe` as ignored local build outputs. Treat those as convenience artifacts when present, not the source of truth.
 - `USSFEdit.cfg` and `USSFEdit.dof` contain compiler and version settings used by the project.
 
 ## Run an existing build on Linux or macOS
 
-If Wine is installed, a checked-in Windows executable can be launched manually:
+If Wine is installed and a local Windows executable is available, it can be launched manually:
 
 ```bash
 wine ./USSFEdit.exe
@@ -51,7 +51,7 @@ The application optionally accepts a single CLI argument. If the first argument 
 
 - There is no automated test suite.
 - The `.vscode/tasks.json` and `.vscode/launch.json` files are aligned to SSFEdit, but Windows Delphi 7 build behavior and the Pascal entrypoint remain the authoritative references.
-- `.gitignore` excludes `.exe`, `.cfg`, `.dfm`, and `.res`, even though artifacts of those types are already present in the repo surface. If you intentionally update those files, stage them explicitly and mention it in your change summary.
+- `.gitignore` excludes `.exe`, `.cfg`, `.dfm`, and `.res`, even though files of those types may already exist in a local worktree. If you intentionally update tracked artifacts or rely on local ignored ones, stage and summarize them deliberately.
 
 See `docs/manual-validation.md` for the workflow-specific checks to run after source or serializer changes.
 

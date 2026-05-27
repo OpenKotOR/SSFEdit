@@ -2,7 +2,7 @@
 
 SSFEdit is a Delphi 7 VCL desktop utility for inspecting and editing KotOR/TSL soundset definition files (`.ssf`). Each `.ssf` entry points to a `StrRef` in `dialog.tlk`, and the application resolves that reference to both the spoken sound resource name and the display text shown in the grid.
 
-The source of truth in this repository is the Pascal code, not the current VS Code tasks. The repo contains committed Windows executables and binary form/resource artifacts, but the canonical source entrypoint is `USSFEdit.dpr`.
+The source of truth in this repository is the Pascal code, not the current VS Code tasks. Some developer worktrees may contain ignored Windows executables and binary form/resource artifacts, but the canonical source entrypoint is `USSFEdit.dpr`.
 
 ## What the app does
 
@@ -29,6 +29,7 @@ The source of truth in this repository is the Pascal code, not the current VS Co
 - [CONVENTIONS.md](CONVENTIONS.md)
 - [CONTRIBUTING.md](CONTRIBUTING.md)
 - [AGENTS.md](AGENTS.md)
+- [docs/knowledgebase/00-intent/ssfedit-repo-intent.md](docs/knowledgebase/00-intent/ssfedit-repo-intent.md)
 - [docs/file-formats.md](docs/file-formats.md)
 - [docs/manual-validation.md](docs/manual-validation.md)
 - [docs/workflows.md](docs/workflows.md)
@@ -36,7 +37,7 @@ The source of truth in this repository is the Pascal code, not the current VS Co
 
 ## Current repo state
 
-- The repo surface is small and self-contained. There is no automated test suite and no existing project documentation besides the Delphi project metadata.
+- The repo surface is small and self-contained. There is no automated test suite, but the repo now has focused root docs plus deeper workflow, validation, and knowledgebase companion docs.
 - The checked-in `.vscode` tasks, launch configs, file nesting patterns, and extension recommendations are aligned to the SSFEdit project surface.
 - `.gitignore` currently excludes several artifact types that are nevertheless present in the working tree, including `.exe`, `.cfg`, `.dfm`, and `.res`. Be explicit when intentionally changing those files.
 

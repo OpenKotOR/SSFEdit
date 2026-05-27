@@ -28,13 +28,13 @@ This repository is a small legacy Delphi tool. Some constraints are part of its 
 
 ## Repository-history limits
 
-- The current `main` branch has no commit history in this checkout.
+- The current `main` branch has only shallow reachable history in this checkout.
 - Git archaeology is therefore not a trustworthy source of intent here.
 - The Pascal sources and the repository docs are the primary evidence surfaces.
 
 ## File-handling caveats
 
-- `.gitignore` excludes `.exe`, `.cfg`, `.dfm`, and `.res` even though files of those types are already present in the repo surface.
+- `.gitignore` excludes `.exe`, `.cfg`, `.dfm`, and `.res` even though files of those types may already exist in local worktrees.
 - If you intentionally modify tracked artifacts of those types, stage and summarize them deliberately.
 
 ## Format safety caveats
