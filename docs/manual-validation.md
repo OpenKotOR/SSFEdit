@@ -22,7 +22,7 @@ Preferred path:
 Fallback on Linux or macOS:
 
 - Static source review only, unless Wine is available and a previously built executable can be run.
-- Do not treat the current `.vscode` tasks or launch configurations as authoritative validation helpers because they target `TSLPatcher`.
+- Treat the `.vscode` tasks and launch configurations as SSFEdit-specific helpers, but not as substitutes for direct source inspection or a real Windows Delphi 7 build.
 
 ### Serializer-sensitive changes
 
@@ -66,7 +66,7 @@ Use this tier when `USSFFile.pas`, `UTLKFile.pas`, or the direct SSF stream logi
 
 - Native Linux or macOS builds
 - Automated regression coverage
-- Trustworthy editor tasks or launch configs for SSFEdit from the current `.vscode` folder
+- Full end-to-end confidence in `.vscode` launch or task execution on non-Windows hosts without Wine and an already-built executable
 
 ## Related documents
 
