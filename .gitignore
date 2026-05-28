@@ -133,6 +133,8 @@ bin-release/
 *.ddp
 *.res
 *.ico
+*Form.pas
+SSFEdit.pas
 ReadMe, really.pdf
 
 # Built Visual Studio Code Extensions

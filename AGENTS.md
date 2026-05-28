@@ -32,7 +32,6 @@ Working rules for agents:
 - Treat TLK string indices as position-based. Appending is safe; deleting or reordering existing entries is not.
 - `.dfm` and `.res` files in this repo are binary assets, not text-form forms/resources.
 - `.vscode/tasks.json`, `.vscode/launch.json`, `.vscode/settings.json`, and `.vscode/extensions.json` are now aligned to SSFEdit, but the Pascal sources and the root docs remain authoritative if tooling metadata ever drifts again.
-- The tracked repo surface does not include the legacy UI form units, so user-facing workflow wording should be anchored to `docs/workflows.md`, the wiki pages, and the tracked serializer/entrypoint files.
 
 Validation expectations:
 
