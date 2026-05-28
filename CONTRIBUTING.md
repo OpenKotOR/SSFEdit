@@ -14,12 +14,20 @@
 - If you change serializer behavior, document the invariant in [CONVENTIONS.md](CONVENTIONS.md) or [ARCHITECTURE.md](ARCHITECTURE.md).
 - If you touch runtime/build assumptions, update [BUILD.md](BUILD.md).
 
+## Wiki documentation
+
+- The end-user manual lives in the top-level `wiki/` submodule and the GitHub wiki, not in the root contributor docs.
+- After cloning, initialize the wiki with `git submodule update --init --recursive wiki` before editing user-facing pages.
+- Keep the split clear: wiki pages are for non-technical users, while the root docs remain contributor and maintenance references.
+- When you change wiki pages, commit and push inside `wiki/` first, then stage the updated submodule pointer in the main repo.
+
 ## Validation workflow
 
 ### Documentation-only changes
 
 - Run `git diff --check`.
 - If the docs describe runtime or serializer behavior, verify those claims against the current Pascal source.
+- If the wiki submodule changed, run `git diff --check` inside `wiki/` as well and confirm the main repo stages the updated gitlink deliberately.
 
 ### Pascal source changes
 

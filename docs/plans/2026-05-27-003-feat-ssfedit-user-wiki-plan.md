@@ -1,7 +1,7 @@
 ---
 title: feat: add end-user wiki submodule for SSFEdit
 type: feat
-status: active
+status: completed
 date: 2026-05-27
 ---
 
