@@ -4,6 +4,12 @@ SSFEdit is a Delphi 7 VCL desktop utility for inspecting and editing KotOR/TSL s
 
 The source of truth in this repository is the Pascal code, not the current VS Code tasks. Some developer worktrees may contain ignored Windows executables and binary form/resource artifacts, but the canonical source entrypoint is `USSFEdit.dpr`.
 
+## User manual
+
+The non-technical user manual lives in the [GitHub wiki](https://github.com/OpenKotOR/SSFEdit/wiki).
+
+In a local clone, that same manual is checked out through the top-level `wiki/` submodule.
+
 ## What the app does
 
 - Opens an existing `.ssf` file or starts a new blank one.
@@ -16,11 +22,10 @@ The source of truth in this repository is the Pascal code, not the current VS Co
 ## Repo map
 
 - `USSFEdit.dpr`: application startup and optional CLI autoload of a `.ssf` path.
-- `SSFEdit.pas`: main window and user workflow.
 - `USSFFile.pas`: SSF v1.1 serializer/deserializer.
 - `UTLKFile.pas`: TLK v3.0 serializer/deserializer.
-- `UEntryForm.pas`: modal dialog for adding a TLK entry.
 - `UST_Common.pas`, `StoffeUtils.pas`: legacy helper utilities.
+- `docs/workflows.md`: user-visible workflow map for the legacy UI behavior.
 
 ## Documentation index
 
@@ -29,6 +34,7 @@ The source of truth in this repository is the Pascal code, not the current VS Co
 - [CONVENTIONS.md](CONVENTIONS.md)
 - [CONTRIBUTING.md](CONTRIBUTING.md)
 - [AGENTS.md](AGENTS.md)
+- [GitHub wiki](https://github.com/OpenKotOR/SSFEdit/wiki)
 - [docs/knowledgebase/00-intent/ssfedit-repo-intent.md](docs/knowledgebase/00-intent/ssfedit-repo-intent.md)
 - [docs/file-formats.md](docs/file-formats.md)
 - [docs/manual-validation.md](docs/manual-validation.md)
