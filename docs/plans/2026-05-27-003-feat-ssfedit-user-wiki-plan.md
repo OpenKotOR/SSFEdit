@@ -1,7 +1,7 @@
 ---
 title: feat: add end-user wiki submodule for SSFEdit
 type: feat
-status: active
+status: completed
 date: 2026-05-27
 ---
 
@@ -56,7 +56,7 @@ The repository already has strong contributor and maintenance documentation, but
 - `docs/workflows.md` maps the real user-visible flows and is the best structured source for user-task coverage.
 - `docs/limitations.md` already captures platform, tooling, and format constraints that should be translated into end-user language.
 - `docs/file-formats.md` is useful as a correctness reference for SSF/TLK terminology, but it should not be copied verbatim into the wiki.
-- `USSFEdit.dpr`, `SSFEdit.pas`, and `UEntryForm.pas` are the runtime anchors for startup, TLK selection, slot editing, add-entry behavior, and save flow.
+- `USSFEdit.dpr` anchors the tracked startup and CLI behavior, while `docs/workflows.md` is the best tracked source for TLK selection, slot editing, add-entry behavior, and save flow in the current repo surface.
 - Direct git observation confirms the wiki remote is reachable at `https://github.com/OpenKotOR/SSFEdit.wiki.git`.
 
 ### Institutional Learnings
@@ -173,7 +173,7 @@ The repository already has strong contributor and maintenance documentation, but
 
 **Approach:**
 
-- Use `README.md`, `docs/workflows.md`, `docs/limitations.md`, `docs/file-formats.md`, `USSFEdit.dpr`, `SSFEdit.pas`, and `UEntryForm.pas` as the accuracy set.
+- Use `README.md`, `docs/workflows.md`, `docs/limitations.md`, `docs/file-formats.md`, `USSFEdit.dpr`, `USSFFile.pas`, and `UTLKFile.pas` as the accuracy set.
 - Translate technical concepts into user outcomes and step-by-step tasks without hiding important constraints like the TLK requirement, fixed slot count, and save ordering.
 - Keep each page narrowly focused so users can navigate to one task at a time.
 
@@ -237,7 +237,7 @@ The repository already has strong contributor and maintenance documentation, but
 - **Interaction graph:** This work adds a new documentation surface that sits alongside the existing developer docs and GitHub repo UI.
 - **Error propagation:** The main failure mode is documentation drift between the wiki and the repo docs; discoverability and ownership wording are the mitigations.
 - **State lifecycle risks:** The wiki becomes a second git history via submodule, so contributor workflows must account for separate checkout and update state.
-- **API surface parity:** Not applicable at runtime, but the wiki's workflow descriptions must stay aligned with the actual behavior in `USSFEdit.dpr`, `SSFEdit.pas`, and `UEntryForm.pas`.
+- **API surface parity:** Not applicable at runtime, but the wiki's workflow descriptions must stay aligned with the tracked behavior evidence in `USSFEdit.dpr`, `docs/workflows.md`, and the serializer-related repo docs.
 - **Unchanged invariants:** The app remains a Delphi 7 VCL editor with fixed 40-slot SSF handling and TLK position-based `StrRef` behavior.
 
 ---
@@ -248,7 +248,7 @@ The repository already has strong contributor and maintenance documentation, but
 | ---- | ---------- |
 | The wiki duplicates or contradicts repo docs | Keep the split explicit: user manual in `wiki/`, contributor/reference docs in the main repo |
 | Submodule setup adds contributor friction | Document discoverability and maintenance expectations in `README.md`, `CONTRIBUTING.md`, and `AGENTS.md` |
-| User docs overpromise unsupported capabilities | Anchor every workflow and limitation to the existing repo docs and runtime-owning Pascal units |
+| User docs overpromise unsupported capabilities | Anchor every workflow and limitation to the tracked repo docs plus the entrypoint and serializer files that remain in source control |
 | Existing wiki content could be overwritten carelessly | Inspect the current wiki checkout before authoring or replacing pages |
 
 ---
@@ -269,5 +269,5 @@ The repository already has strong contributor and maintenance documentation, but
 - Related docs: `docs/limitations.md`
 - Related docs: `docs/file-formats.md`
 - Related code: `USSFEdit.dpr`
-- Related code: `SSFEdit.pas`
-- Related code: `UEntryForm.pas`
+- Related code: `USSFFile.pas`
+- Related code: `UTLKFile.pas`
